@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoList</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="todo.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  </head>
+  <body>
+    <div class="navbar"></div>
+
+    <div class="main-container">
+      <div class="searchAndAdd">
+        <div class="search">
+          <div class=""><i class="fa-solid fa-magnifying-glass"></i></div>
+          <div class=""><input onkeyup="searchFunc()" id="searchInp" placeholder="Search to do" type="text" /></div>
+        </div>
+
+        <button
+          class="filterTodo"
+          style="transition: opacity 0.25s ease; border: none; outline: none"
+          type="button"
+        >
+          <i
+            style="font-size: 15px; margin-right: 3px"
+            class="fa-solid fa-filter"
+          ></i>
+          <span style="font-size: 15px">Filter</span>
+        </button>
+
+         <button 
+        class="editTodo"
+        style="transition: opacity 0.25s ease; border: none; outline: none"
+        type="button"
+        onclick="editKey()"
+      >
+        <i style="font-size: 15px; margin-right: 3px" class="fa-solid fa-user-pen"></i>
+        <span style="font-size: 15px">Edit</span>
+      </button> 
+
+        <button
+          class="addTodo"
+          style="transition: opacity 0.25s ease; border: none; outline: none"
+          type="button"
+          onclick="openModal()"
+        >
+          <i
+            style="font-size: 15px; margin-right: 3px"
+            class="fa-sharp fa-solid fa-plus"
+          ></i>
+          <span style="font-size: 16px">Add</span>
+        </button>
+      </div>
+
+      <div class="explanation-box">
+        <div class="deleteSquare mid">
+          <!-- <i  style="color: rgb(244, 244, 244);" id="squareId" class="fa-solid fa-square" ></i> -->
+          <!-- <i
+            style="font-size: 17px; color: rgb(89, 89, 89)"
+            class="fa-regular fa-square"
+          ></i> -->
+        </div>
+        <div class="typePiece mid">Type</div>
+        <div class="articlesPiece mid">Work to do</div>
+        <div class="importancePiece mid">Importance</div>
+        <div class="statusPiece mid ">Status</div>
+        <div class="datePiece mid ">Date</div>
+        <div class="editPiece  mid">Edit</div>
+        <!-- <div class="deletePiece ">Delete</div> -->
+      </div>
+    </div>  
+
+
+    <ul class="todoUl">
+
+      <!-- var oList = `
+        
+      <div class="todo-box">
+        <div onclick="iconWithDelete('${id}')" class="tick-icon mid">
+
+      <input id="checkBox" type="checkbox">
+        </div>
+        <div class="articles mid">${yapilacak}</div>
+        <div class="date-box mid">${newFormatDate}</div>
+        <div class="importanceWrite mid">
+          <div class="downImportance mid ${önem}">${önem}</div>
+        </div>
+        <div class="statusWrite mid">
+          <div class="downStatus mid ${durum}">${durum}</div>
+        </div>
+        <div class=" edit-box mid">
+        <i
+        style="color: rgb(117, 117, 255)"
+        class="fa-solid fa-square-pen"
+        onclick="editModal('${id}')"
+      ></i>
+        </div>
+        <div onclick="deleteItem('${id}')" class="delete-box mid">
+          <i  style="color: red" class="fa-solid fa-trash-can deleteBox"></i>
+        </div>
+      </div>
+      `;
+return oList; -->
+
+
+    </ul>
+
+
+    
+    <div class="todo-add">
+      <!-- <div>
+        <p>
+          <button class="btn btn--blue" style="  transition: opacity 0.25s ease;
+          border:none; outline:none;" type="button" onclick="openModal()">
+            <i style="font-size: 30px" class="fa-sharp fa-solid fa-plus"></i>
+          </button>
+        </p>
+      </div> -->
+      <div class="modal" style="display: none;">
+        <div class="modal__inner">
+          <!-- <button class="modal__close" style="  transition: opacity 0.25s ease;
+          font-family: sans-serif; border:none;outline:none;" onclick="closeModal()" type="button">EXIT</button> -->
+          <div onclick="closeModal()" class="modal__close"><i class="fa-solid fa-arrow-right-from-bracket"></i></div>
+          <div style="margin-top: 50px;" class="modalbox">
+            <div class="article">Type : </div>
+            <div class="inpBox"><input id="typeInp" type="text" /></div>
+          </div>
+          <div style="margin-top: 50px;" class="modalbox">
+            <div class="article">To Do :</div>
+            <div class="inpBox"><input id="todoInp" type="text" /></div>
+          </div>
+          <div class="modalbox">
+            <div class="article">Date :</div>
+            <div class="inpBox"><input id="dateInp" type="date" /></div>
+          </div>
+
+          <div class="sectionBox">
+            <div class="sectionImportance">
+              <div class="titleImportance" >Importance </div>
+              <select  style="width: 180px;height: 40px;font-size: 20px;" id="importance">
+                <option value="high">high</option>
+                <option value="low">low</option>
+                <option value="middle">middle</option>
+              </select>
+            </div>
+            <div class="sectionStatus">
+
+              <div class="StatusImportance" >Status </div>
+              <select style="width: 180px;height: 40px;font-size: 20px;" id="status">
+                <option value="Completed">Completed</option>
+                <option value="cancel">cancel</option>
+                <option value="wait">wait</option>
+              </select>
+            </div>
+          </div>
+          <div id="addBtn" onclick="addItem()"  class="save-container">ADD</div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <script src="todoFirebase.js"></script>
+    <script src="todo.js"></script>
+  
+  </body>
+</html>

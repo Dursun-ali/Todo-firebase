@@ -1,0 +1,554 @@
+@import url("https://fonts.googleapis.com/css2?family=Khand:wght@300;500;600&family=Montserrat:wght@300&family=Space+Grotesk:wght@300&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+}
+.navbar {
+  width: 100%;
+  height: 16rem;
+  background-color: grey;
+  background: url("./assets/rave-cube-geometry-gradient-4k-hq.jpg");
+  background-size: auto 100%;
+}
+.main-container {
+  position: relative;
+  bottom: 8.3rem;
+}
+body{
+  background-color: rgb(248, 248, 248);
+}
+.searchAndAdd {
+  position: relative;
+  /* width: 70%;
+  margin: 0 15%; */
+  width: 80%;
+  margin: 0 10%;
+  height: 6rem;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 0.01rem solid rgb(248, 248, 248);
+  border-radius: 0.5rem;
+}
+#squareId {
+  /* color: rgb(215, 215, 215); */
+  font-size: 1.3rem;
+  
+}
+.search {
+  position: absolute;
+  left: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15rem;
+  height: 2.8rem;
+  background-color: rgb(247, 247, 247);
+  border-radius: 0.5rem;
+  color: rgb(178, 178, 178);
+}
+.search input {
+  width: 12rem;
+  height: 1.8rem;
+  font-size: 0.9rem;
+  outline: none;
+  border: none;
+  background-color: rgb(247, 247, 247);
+  color: rgb(72, 72, 72);
+}
+.search i {
+  margin-right: 0.3rem;
+  font-size: 1.1rem;
+  color: rgb(178, 178, 178);
+}
+.filterTodo {
+  position: absolute;
+  right: 18.5rem;
+  width: 5rem;
+  height: 2.8rem;
+  /* background-color: rgb(226, 226, 226); */
+  background-color: rgb(245, 245, 245);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: rgb(0, 60, 97);
+}
+.editTodo {
+  position: absolute;
+  right: 11rem;
+  width: 7rem;
+  height: 2.8rem;
+  background-color: rgb(245, 245, 245);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: rgb(0, 60, 97);
+}
+.editTodo:hover {
+  background-color: rgb(10, 102, 222);
+  color: white;
+}
+.filterTodo:hover {
+  background-color: rgb(10, 102, 222);
+  color: white;
+}
+.addTodo {
+  position: absolute;
+  right: 2rem;
+  width: 8.5rem;
+  height: 2.8rem;
+  background-color: rgb(10, 102, 222);
+  border-radius: 0.5rem;
+  color: white;
+  cursor: pointer;
+}
+#checkBox {
+  font-size: 4rem;
+}
+/* üstteki gösterge kısmımıza ait bölümümüz start */
+.explanation-box {
+  /* width: 70%;
+  height: 2.8rem;
+  margin: 0 15%; */
+  position: relative;
+  top: -0.4rem;
+  width: 80%;
+  height: 3.5rem;
+  margin: 0 10%;
+  background-color: white;
+  display: flex;
+  font-family: sans-serif;
+  color: rgb(75, 75, 75);
+  font-size: 0.9rem;
+  border-bottom: 0.01rem solid rgb(237, 237, 237);
+  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(220, 220, 220, 0.3) 0px 3px 1px -3px; */
+  box-shadow: rgba(174, 175, 178, 0.3) 0px 1px 2px 0px, rgba(201, 206, 209, 0.15) 0px 2px 6px 2px;
+}
+
+.deleteSquare {
+  width: 5rem;
+  background-color: white;
+}
+.typePiece {
+  width: 11rem;
+  background-color: white;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(150, 150, 150);
+  font-size: 1rem;
+}
+.articlesPiece {
+  width: 18rem;
+  background-color: white;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(150, 150, 150);
+  font-size: 1rem;
+}
+.datePiece {
+  width: 12.5rem;
+  background-color: white;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(150, 150, 150);
+  font-size: 1rem;
+  margin-left: 0.5rem;
+}
+.importancePiece {
+  width: 11rem;
+  background-color: white;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(150, 150, 150);
+  font-size: 1rem;
+}
+.statusPiece {
+  width: 12rem;
+  background-color: white;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(150, 150, 150);
+  font-size: 1rem;
+}
+.editPiece {
+  width: 4rem;
+  background-color: white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 1rem;
+  color:rgb(150, 150, 150);
+  opacity: 0;
+}
+/* .deletePiece {
+  width: 3rem;
+  background-color: #640d70;
+} */
+/* üstteki gösterge kısmımıza ait bölümümüz end */
+
+.mid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* yazılarımın oldugu todo kısmı edit ve delete olan */
+
+.todo-box {
+  display: flex;
+  width: 80%;
+  margin: 0 10%;
+  height: 4.5rem;
+  background-color: white;
+  z-index: 99;
+  border-bottom: 0.01rem solid rgb(238, 238, 238);
+  box-shadow: rgba(174, 175, 178, 0.3) 0px 1px 2px 0px, rgba(181, 184, 186, 0.15) 0px 2px 6px 2px;
+}
+.tick-icon {
+  width: 5rem;
+  height: 4.5rem;
+  background-color: white;
+  font-size: 1.3rem;
+
+}
+.types {
+  width: 11rem;
+  height: 4.5rem;
+  background-color: white;
+  font-family: sans-serif;
+  color: rgb(49, 49, 49);
+}
+.articles {
+  display: flex;
+  align-items: center;
+  width: 18rem;
+  height: 4.5rem;
+  background-color: white;
+  font-family: sans-serif;
+  color: rgb(46, 46, 46);
+}
+.date-box {
+  width: 12.5rem;
+  height: 4.5rem;
+  margin-left: 0.5rem;
+  background-color: white;
+  color: rgb(69, 69, 69);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.importanceWrite {
+  width: 11rem;
+  height: 4.5rem;
+  background-color: white;
+}
+.downImportance {
+  width: 5rem;
+  height: 1.2rem;
+  border-radius: 0.4rem;
+  color: rgb(255, 255, 255);
+  font-family: "Khand", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.8rem;
+}
+
+.statusWrite {
+  width: 12rem;
+  height: 4.5rem;
+  background-color: white;
+}
+.downStatus {
+  width: 5rem;
+  height: 1.2rem;
+  background-color: #343434;
+  border-radius: 0.4rem;
+  color: rgb(255, 255, 255);
+  font-family: "Khand", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.8rem;
+}
+.edit-box {
+  width: 4rem;
+  height: 4.5rem;
+  background-color: white;
+  font-size: 1.4rem;
+  cursor: pointer;
+  /* opacity: 0; */
+} 
+/* .delete-box {
+  width: 3rem;
+  height: 2.8rem;
+  background-color: #0400e3;
+  font-size: 1.3rem;
+  cursor: pointer;
+}  */
+
+/* yazılarımın oldugu todo kısmı edit ve delete olan end */
+
+/* modal start */
+
+.modal {
+  /* visibility: hidden; */
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: left;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 99999;
+}
+
+/* modal yapımın konumu ile o beyaz kısmımızın ayarlanması */
+.modal__inner {
+  transition: top 0.25s ease;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 50rem;
+  margin: auto;
+  overflow: auto;
+  background: #f2f2f2;
+  border-radius: 5px;
+  padding: 1em 2em;
+  height: 35rem;
+  border-radius: 0.5rem;
+  padding-bottom: 4rem;
+}
+
+/* kapama tusumuzun konumunun belirlenmesi */
+.modal__close {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: rgb(27, 22, 48);
+  font-size: 2rem;
+}
+
+.btn {
+  cursor: pointer;
+  background: #27ae60;
+  display: inline-block;
+  color: #fff;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* bu yapım buton buyuklugumuzu belirleyen yapımızdır. */
+.btn--blue {
+  position: absolute;
+  right: 0;
+  background: #2980b9;
+  height: 5rem;
+  width: 5rem;
+  background-color: #2980b9;
+}
+
+.btn--blue:hover,
+.btn--blue:focus {
+  background: #3498db;
+}
+
+.modalbox {
+  display: flex;
+  margin: 2.9rem 20%;
+  width: 30rem;
+  height: 3.5rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+}
+.article {
+  width: 7rem;
+  height: 3.5rem;
+  background-color: #ffffff;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.inpBox {
+  display: flex;
+  align-items: center;
+  /* width: 25rem; */
+  width: 22rem;
+  height: 3.5rem;
+  background-color: #ffffff;
+}
+.inpBox input {
+  width: 25rem;
+  height: 2.5rem;
+  font-size: 1.5rem;
+  outline: none;
+  border: none;
+}
+.sectionBox {
+  display: flex;
+  width: 60%;
+  margin: 0 20%;
+  height: 9rem;
+}
+.sectionImportance {
+  position: relative;
+  /* width: 50%; */
+  width: 15rem;
+  height: 9rem;
+  background-color: rgb(236, 236, 236);
+}
+.sectionStatus {
+  /* width: 50%; */
+  width: 15rem;
+  height: 9rem;
+  background-color: rgb(236, 236, 236);
+}
+.titleImportance {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 4rem;
+  /* background-color: var(--color1); */
+  background: url(./assets/rave-cube-geometry-gradient-4k-hq.jpg);
+  font-size: 1.5rem;
+  border: 0.02rem solid var(--color4);
+  color: white;
+}
+.StatusImportance {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 4rem;
+  background: url(./assets/rave-cube-geometry-gradient-4k-hq.jpg);
+  font-size: 1.5rem;
+  border: 0.02rem solid var(--color4);
+  color: white;
+}
+#importance {
+  position: absolute;
+  right: 1.5rem;
+  top: 5.3rem;
+  border: none;
+  outline: none;
+}
+#status {
+  position: absolute;
+  right: 14.2rem;
+  top: 28.8rem;
+  border: none;
+  outline: none;
+}
+.save-container {
+  position: absolute;
+  bottom: 2rem;
+  left: 22rem;
+  width: 8rem;
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  /* background-color: rgb(10, 102, 222); */
+  background: url(./assets/rave-cube-geometry-gradient-4k-hq.jpg);
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-family: sans-serif;
+}
+/* modal end */
+.todoUl {
+  position: relative;
+  top: -8.68rem;
+  z-index: 99;
+}
+
+.high {
+
+  background-color: rgba(212, 16, 22, 0.263);
+  color: rgb(162, 3, 3);
+  width: 3.6rem;
+  border-radius: 0.2rem;
+  height: 1.4rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.low {
+  background-color: rgba(58, 185, 46, 0.283);
+  color: rgb(25, 181, 36);
+  width: 3.6rem;
+  height: 1.3rem;
+  border-radius: 0.2rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.middle {
+  background-color: rgba(255, 145, 0, 0.365);
+  color: #ec5c02;
+  width: 4.5rem;
+  height: 1.4rem;
+  border-radius: 0.2rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.Completed {
+  background-color: rgba(58, 185, 46, 0.283);
+  color: rgb(25, 181, 36);
+  width: 6rem;
+  height: 1.4rem;
+  border-radius: 0.2rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.cancel {
+  background-color: rgba(212, 16, 22, 0.263);
+  color: rgb(162, 3, 3);
+  width: 5rem;
+  border-radius: 0.2rem;
+  height: 1.4rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.wait {
+  background-color: rgba(0, 178, 232, 0.244);
+  color: rgb(6, 115, 161);
+  border-radius: 0.2rem;
+  width: 4rem;
+  height: 1.4rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+#square {
+  color: rgb(244, 244, 244);
+}
+.checkIconBox{
+  width: 1.1rem;
+  height: 1.1rem;
+  background-color: rgb(244, 244, 244);
+  /* background-color: rgb(0, 80, 184); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.1rem;
+}
+#checkk{
+  color: rgb(244, 244, 244);
+}
+
+.background{
+  background-color: rgb(53, 114, 194);
+  color: white;
+}
+.editIconn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 1.2rem;
+  background-color: rgba(87, 132, 230, 0.397);
+  border-radius: 0.2rem;
+  color: rgb(0, 60, 97);
+  font-size: 0.8rem;
+  opacity: 0;
+}
+.opacityOne{
+  opacity: 1;
+}
